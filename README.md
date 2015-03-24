@@ -5,7 +5,7 @@ I found [this](http://oaklandcac.pbworks.com/w/page/59627544/Facts%20About%20OUS
 
 The author used some Bar Charts to show the data. There are some improvements I suggested in my post, and based on which, I recreated some graphs.
 
-![image](/Users/Bella/Desktop/funny.jpg?raw=TRUE)
+![funny](/Users/Bella/Desktop/funny.png?raw=TRUE)
 
 
 
