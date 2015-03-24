@@ -1,0 +1,157 @@
+---
+title: "Pie Charts on OUSD's Students with Disabilities"
+author: "Yuxin(Bella) Wang"
+date: "March 24, 2015"
+output: html_document
+---
+
+I found [this](http://oaklandcac.pbworks.com/w/page/59627544/Facts%20About%20OUSD's%20Students%20with%20Disabilities) document on pbworks. The author summarized data from [California Department of Education database](http://data1.cde.ca.gov/dataquest/dataquest.asp) and revealed the facts about students with disabilities in 2011-2012 in order to improve education services to special education students in Oakland district in California.
+
+In the document, the author used different [Pie Charts](http://oaklandcac.pbworks.com/w/file/fetch/59627692/OUSDSPED%20Pop%20by%20Disability-Ethnic%202011-12.pdf) to illustrate special education population broken down by disability and by ethnicity.
+
+Here is what the writer wants to demonstrate using the pie charts:
+
+>*“The majority (over 50%) of these students had specific learning disabilties and speech-language impairments and that was consistent across every race/ethnic subgroup."*
+
+>*“The majority of OUSD's special educations students are African-American and Hispanic/Latino as are the majority of students in OUSD but African-American students make up a higher proportion of special educations students compared to their proportion district-wide while Hispanic/Latino special education students make up a significantly lower proportion compared to their representation district-wide.”*
+
+
+After staring at the graphs for a while, I cannot get the information that should be presented. Though they show some facts, I still don’t know what the writer wants me to focus on.   
+
+
+**These Pie Charts themselves are NOT telling the story.....**
+
+
+##**What is the problem with the graphs?**
+
+![](/Users/Bella/Desktop/Untitled.png)
+
+The first graph is about entire special education population broken down by disability. And the writer points out more than half of special education students is due to specific learning disabilities and speech-language impairments.   
+
++ Firstly, there are too many items putting on the chart, it is hard to read data even the legend besides it.  
+
++ Secondly, it is not easy to compare populations among different cases, though I can tell specific learning disabilities and speech-language impairments take big parts. How are they compared with others? What are the next three top cases? The picture would be clearer if we organize the portions of different cases in order. Especially we can put specific learning disabilities and speech-language impairments together in the pie chart to emphases they are the most common cases among special education students.  
+
++ The third one is the color issue, there are way too many colors distracting attention from the key point (it makes me dizzy to stare at the rainbow colors in circular pie chart). In addition, some cases are represented by similar color, for instance, Autism and Orthopedic impairment, then people is difficult to distinguish them from chart.
+
+
+After the first graph, the author employs another 6 pie charts to demonstrate and compare special education population broken down by ethnicity:
+
+![](/Users/Bella/Desktop/Untitled 2.png)
+![](/Users/Bella/Desktop/Untitled 3.png)
+![](/Users/Bella/Desktop/Untitled 4.png)
+![](/Users/Bella/Desktop/Untitled 5.png)
+![](/Users/Bella/Desktop/Untitled 6.png)
+![](/Users/Bella/Desktop/Untitled 7.png)
+
+
+Same problems with the first graph that mentioned above exists in these pie charts.  
+**Another shortcoming** for pie chart is it is not allowing us to compare the data across ethnicity group. The writer says:"*special education students make up a significantly lower proportion compared to their representation district-wide*". BUT, the charts do not make it easier for me to compare information..
+
+
+**Based on these dissatisfied points, I made some improvement.**   
+
+##**Here are my revised versions:**
+
+For the first chart, if the pie chart is a must to have, I integrate all the other 10 cases into one slice and lighten its color to emphasis the parts of specific learning disability and speech or language impairment.  
+
+```{r,echo=FALSE}
+library(dplyr)
+library(ggplot2)
+library(gplots)
+library(scales)
+library(reshape)
+library(devtools)
+Ethnicity<-c("Native American","Asian","Pacific Islander","Multi","Hispanic","African American","White")
+IntellectualDisability <- c(0,43,0,0,200,299,23)
+HardofHearing <-c(0,0,0,0,39,24,0)
+Deaf<-c(0,0,0,0,16,12,0)
+SpeechorLanguageImpairment <- c(0,182,0,47,578,391,92)
+VisualImpairment <-c(0,0,0,0,20,22,0)
+EmotionalDisturbance <- c(0,14,0,14,75,285,24)
+OrthopedicImpairment <- c(0,0,0,0,28,0,0)
+OtherHealthImpairment <-c(0,0,0,15,63,145,40)
+SpecificLearningDisability <-c(0,100,12,43,654,891,87)
+DeafBlindness <-c(0,0,0,0,0,0,0)
+MultipleDisability <-c(0,0,0,0,23,17,0)
+Autism <-c(0,67,0,28,112,158,66)
+TraumaticBrainInjury <-c(0,0,0,0,0,12,0)
+df <- data.frame(Ethnicity,SpecificLearningDisability,SpeechorLanguageImpairment,IntellectualDisability,Autism,EmotionalDisturbance,OtherHealthImpairment,HardofHearing,VisualImpairment,MultipleDisability,Deaf,
+                 OrthopedicImpairment,TraumaticBrainInjury,DeafBlindness)
+num <-colSums(Filter(is.numeric, df))
+ndata<- data.frame(names(num),num)
+n1<-(names(num))
+n2<-c(ndata[,2])
+newd <-data.frame(n1,n2)
+col_headings <-c("case","num")
+names(newd) <- col_headings
+newd1 <-newd %>%
+  arrange(desc(num))
+newd1<- newd1 %>%
+  mutate(per=num/sum(num)*100)
+
+testr <-c("Other10", sum(newd1$num)-newd1$num[1]-newd1$num[2],100-newd1$per[1]-newd1$per[2])
+newd1[,1] <- sapply(newd1[,1],as.character) 
+pien<-rbind(newd1[1:2,],testr)
+sum(as.numeric(pien$per))
+```
+
+```{r}
+pic<-ggplot(pien,aes(x="",y=as.numeric(per),fill=case))+
+  geom_bar(stat="identity")+
+  ggtitle("SpecialEducationsStudents(5,088 students)")+
+  coord_polar(theta="y")+
+  theme(axis.ticks=element_blank(),axis.title=element_blank(),axis.text.y=element_blank())+
+  geom_text(aes(y=cumsum(as.numeric(pien$per))- as.numeric(pien$per)/2,label=percent(round(as.numeric(pien$per),2)/100)),color="yellow", size=8)+
+  scale_fill_manual(name="Instance",breaks=c("SpecificLearningDisability","SpeechorLanguageImpairment","Other10"),values=c("grey","blue","#FF6262"))+
+  scale_y_continuous(breaks=cumsum(as.numeric(pien$per))- as.numeric(pien$per)/2, labels=pien$case)
+plot(pic)
+```
+
+Thus, this pie chart has only three slices, labeling clearly with instance name and percentage on the top. In this way, people can say how these two cases occupy in whole special education students compared to the rest.
+
+**Also, here is alternative using the pie chart.** The stocked bar graph can achieve the purpose to demonstrate Part-to–Whole concept. It displays all instances by colors for each ethnicity, and it allows people to compare the data across races.
+
+```{r,echo=FALSE}
+df<-df %>%
+  mutate(total=rowSums(Filter(is.numeric, df))) %>%
+  arrange(total)
+```
+```{r,echo=FALSE}
+df.m <-melt(df[2:7,1:13], id.vars="Ethnicity")
+stpic<-ggplot(df.m, aes(x=Ethnicity, y=value,fill=variable)) +geom_bar(stat="identity",position="stack",width=0.75)+
+  scale_fill_discrete(name="Instance")+
+  scale_x_discrete("Ethnicity")+
+  scale_y_continuous("Number of Instances")+
+  scale_colour_brewer(palette="Blues")
+plot(stpic)
+```
+
+**Then**, to compare the population of special education students by ethnicity and by various cases, I would use **BAR CHARTS** through which I am able to put them as close together as possible by group and align them along a common baseline to make comparison easy. 
+```{r}
+dodgepic<-ggplot(df.m, aes(x=Ethnicity, y=value,fill=variable)) +geom_bar(stat="identity",position="dodge",width=0.9)+
+  scale_fill_discrete(name="Instance")+scale_x_discrete("Ethnicity")+scale_y_continuous("Number of Instances")+theme(legend.text=element_text(size=7))
+plot(dodgepic)
+```
+
+As you can see, it is obvious to tell which ethnicity has largest number and which ethnicity has the smallest number of special education students.
+
+***For A closer look***, I split up data by two variables (ethnicity, type of instances) and plot the subsets of data together by **Facet-Horizontal-Bar Chart**. We can see exactly what is going on with each ethnicity for every instance in the race at first glance!!
+
+```{r}
+stpicfa<- stpic+coord_flip()+
+  facet_wrap(~variable,nrow=4)+theme(legend.text=element_text(size=6),strip.text.x=element_text(size=7))
+par(mar=c(0,0,0,0))
+plot(stpicfa)
+```
+
+
+####Generally speaking,
+People go for the **Pie Chart** since it takes information, it more understandable and it can show how different parts make up a whole.   
+
+**BUT** sometimes it does quite the reverse..   
+
+As I’ve used above, the **Bar Chart** might be serve as a supportive or alternative one which has a much more clear indicator of parts of the whole and has comparison capability across groups.
+
+
+**Here are the [datasource](http://data1.cde.ca.gov/dataquest/dataquest.asp), [original graphs](http://oaklandcac.pbworks.com/w/file/fetch/59627692/OUSDSPED%20Pop%20by%20Disability-Ethnic%202011-12.pdf) and [original article](http://oaklandcac.pbworks.com/w/page/59627544/Facts%20About%20OUSD's%20Students%20with%20Disabilities) *
