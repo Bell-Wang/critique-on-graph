@@ -105,7 +105,7 @@ pic<-ggplot(pien,aes(x="",y=as.numeric(per),fill=case))+
   geom_text(aes(y=cumsum(as.numeric(pien$per))- as.numeric(pien$per)/2,label=percent(round(as.numeric(pien$per),2)/100)),color="yellow", size=8)+
   scale_fill_manual(name="Instance",breaks=c("SpecificLearningDisability","SpeechorLanguageImpairment","Other10"),values=c("grey","blue","#FF6262"))+
   scale_y_continuous(breaks=cumsum(as.numeric(pien$per))- as.numeric(pien$per)/2, labels=pien$case)
-print(pic)
+plot(pic)
 ```
 
 Thus, this pie chart has only three slices, labeling clearly with instance name and percentage on the top. In this way, people can say how these two cases occupy in whole special education students compared to the rest.
@@ -124,14 +124,14 @@ stpic<-ggplot(df.m, aes(x=Ethnicity, y=value,fill=variable)) +geom_bar(stat="ide
   scale_x_discrete("Ethnicity")+
   scale_y_continuous("Number of Instances")+
   scale_colour_brewer(palette="Blues")
-print(stpic)
+plot(stpic)
 ```
 
 **Then**, to compare the population of special education students by ethnicity and by various cases, I would use **BAR CHARTS** through which I am able to put them as close together as possible by group and align them along a common baseline to make comparison easy. 
 ```{r}
 dodgepic<-ggplot(df.m, aes(x=Ethnicity, y=value,fill=variable)) +geom_bar(stat="identity",position="dodge",width=0.9)+
   scale_fill_discrete(name="Instance")+scale_x_discrete("Ethnicity")+scale_y_continuous("Number of Instances")+theme(legend.text=element_text(size=7))
-print(dodgepic)
+plot(dodgepic)
 ```
 
 As you can see, it is obvious to tell which ethnicity has largest number and which ethnicity has the smallest number of special education students.
@@ -142,7 +142,7 @@ As you can see, it is obvious to tell which ethnicity has largest number and whi
 stpicfa<- stpic+coord_flip()+
   facet_wrap(~variable,nrow=4)+theme(legend.text=element_text(size=6),strip.text.x=element_text(size=7))
 par(mar=c(0,0,0,0))
-print(stpicfa)
+plot(stpicfa)
 ```
 
 
