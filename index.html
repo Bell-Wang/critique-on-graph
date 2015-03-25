@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Critique on graph : ">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Critique on graph</title>
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Critique on graph by Bell-Wang</title>
   </head>
 
   <body>
+    <div id="container">
+      <div class="inner">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Bell-Wang/critique-on-graph">View on GitHub</a>
-
-          <h1 id="project_title">Critique on graph</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Bell-Wang/critique-on-graph/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Bell-Wang/critique-on-graph/tarball/master">Download this project as a tar.gz file</a>
-            </section>
+        <header>
+          <h1>Critique on graph</h1>
+          <h2></h2>
         </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>I found <a href="http://oaklandcac.pbworks.com/w/page/59627544/Facts%20About%20OUSD's%20Students%20with%20Disabilities">this</a> document on pbworks. The author summarized data from <a href="http://data1.cde.ca.gov/dataquest/dataquest.asp">California Department of Education database</a> and revealed the facts about students with disabilities in 2011-2012 in order to improve education services to special education students in Oakland district in California.</p>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/Bell-Wang/critique-on-graph/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/Bell-Wang/critique-on-graph/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/Bell-Wang/critique-on-graph" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <p>I found <a href="http://oaklandcac.pbworks.com/w/page/59627544/Facts%20About%20OUSD's%20Students%20with%20Disabilities">this</a> document on pbworks. The author summarized data from <a href="http://data1.cde.ca.gov/dataquest/dataquest.asp">California Department of Education database</a> and revealed the facts about students with disabilities in 2011-2012 in order to improve education services to special education students in Oakland district in California.</p>
 
 <p>In the document, the author used different <a href="http://oaklandcac.pbworks.com/w/file/fetch/59627692/OUSDSPED%20Pop%20by%20Disability-Ethnic%202011-12.pdf">Pie Charts</a> to illustrate special education population broken down by disability and by ethnicity.</p>
 
@@ -167,18 +167,15 @@ print(<span class="pl-smi">pic</span>)
   scale_fill_discrete(<span class="pl-v">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Instance<span class="pl-pds">"</span></span>)<span class="pl-k">+</span>scale_x_discrete(<span class="pl-s"><span class="pl-pds">"</span>Ethnicity<span class="pl-pds">"</span></span>)<span class="pl-k">+</span>scale_y_continuous(<span class="pl-s"><span class="pl-pds">"</span>Number of Instances<span class="pl-pds">"</span></span>)<span class="pl-k">+</span>theme(<span class="pl-v">legend.text</span><span class="pl-k">=</span>element_text(<span class="pl-v">size</span><span class="pl-k">=</span><span class="pl-c1">7</span>))
 <span class="pl-smi">stpicfa</span><span class="pl-k">&lt;-</span> <span class="pl-smi">stpic</span><span class="pl-k">+</span>coord_flip()<span class="pl-k">+</span>facet_wrap(<span class="pl-k">~</span><span class="pl-smi">variable</span>,<span class="pl-v">nrow</span><span class="pl-k">=</span><span class="pl-c1">4</span>)<span class="pl-k">+</span>theme(<span class="pl-v">legend.text</span><span class="pl-k">=</span>element_text(<span class="pl-v">size</span><span class="pl-k">=</span><span class="pl-c1">6</span>),<span class="pl-v">strip.text.x</span><span class="pl-k">=</span>element_text(<span class="pl-v">size</span><span class="pl-k">=</span><span class="pl-c1">7</span>))
 print(<span class="pl-smi">stpicfa</span>)</pre></div>
-      </section>
+        </section>
+
+        <footer>
+          Critique on graph is maintained by <a href="https://github.com/Bell-Wang">Bell-Wang</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Critique on graph maintained by <a href="https://github.com/Bell-Wang">Bell-Wang</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
   </body>
 </html>
